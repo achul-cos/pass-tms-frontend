@@ -5,6 +5,9 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+@plugin "flyonui";
+@import "../../node_modules/flyonui/variants.css"; /* Require only if you want to use FlyonUI JS component */
+
 @import '../../node_modules/aos/dist/aos.css';
 
 @font-face {

@@ -1,11 +1,12 @@
-<main class="h-full w-full">
+<main class="h-full w-full"">
 
-    @livewire('dashboard.sidebar')
+    <livewire:dashboard.modal-tambah-jadwal />
+    <livewire:dashboard.sidebar />    
 
     <div class="relative w-full z-0 min-h-[calc(100vh)] pt-28 flex flex-col bg-cover bg-no-repeat bg-top-right overflow-hidden transition-all duration-500 max-md:ps-0 min-md:ps-48"
          :class="sidebarOpen ? 'min-md:!ps-48 max-md:!ps-0' : 'min-md:!ps-0 max-md:!ps-0'">
         <!-- Background -->
-        <div class="absolute top-26 inset-0 z-0 bg-[url(../../public/img/pattren/Square-Pattern1-Orange.png)] bg-cover bg-no-repeat opacity-15"></div>
+        <div class="absolute top-26 inset-0 z-0 left-48 bg-[url(../../public/img/pattren/Square-Pattern1-Orange.png)] bg-cover bg-no-repeat opacity-15"></div>
 
         <!-- Sub Judul -->
         <div class="relative text-dark flex flex-col gap-y-2 p-4 ps-8 pb-8 border-b-2 border-dark shrink-0">
@@ -16,8 +17,8 @@
         <!-- Konten Utama -->
         <div class="flex flex-row justify-between w-full flex-1 border-b-2 z-10 border-dark">
             <div class="w-8 text-dark bg-[image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_4%)]"></div>
-            <div class="w-full border-x-2 border-dark p-4 px-8 flex flex-col gap-y-8">
-                <div class="flex flex-row justify-between gap-x-4">
+            <div class="w-full border-x-2 border-dark p-4 px-8 flex flex-col gap-y-8">              
+                <div class="flex flex-row justify-between max-md:flex-wrap max-md:gap-y-8 gap-x-4">
                     <div class="w-full flex flex-col gap-y-4">
                         <p class="text-xl font-bold text-dark border-b-2  pe-4 pb-2">Informasi Kilat</p>
                         <div class="flex flex-row flex-wrap gap-4 transition-all">
@@ -68,11 +69,11 @@
                     <div class="w-full flex flex-col gap-y-4">
                         <p class="text-xl font-bold text-dark border-b-2 pe-4 pb-2">Aksi Cepat</p>
                         <div class="flex flex-row flex-wrap gap-4">
-                            <div class="flex items-center group">
-                                <div class="absolute flex items-center justify-center w-16 h-16 rounded-full bg-yellow border-2 border-dark z-20 ring-4 ring-white group-hover:scale-110 group-active:scale-95 transition-all duration-200 ease-in-out">
+                            <div class="flex items-center">
+                                <button data-overlay="#modalTambahJadwal" class="absolute flex items-center justify-center w-16 h-16 rounded-full bg-yellow border-2 border-dark z-20 ring-4 ring-white hover:scale-110 active:scale-95 transition-all duration-200 ease-in-out">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-12 h-12 fill-black"><path d="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM296 408L296 344L232 344C218.7 344 208 333.3 208 320C208 306.7 218.7 296 232 296L296 296L296 232C296 218.7 306.7 208 320 208C333.3 208 344 218.7 344 232L344 296L408 296C421.3 296 432 306.7 432 320C432 333.3 421.3 344 408 344L344 344L344 408C344 421.3 333.3 432 320 432C306.7 432 296 421.3 296 408z"/></svg>
-                                </div>
-                                <div class="min-w-48 h-30 flex justify-center items-start ps-12 p-4 flex-col bg-orange rounded-2xl border-2 border-dark translate-x-8 z-10">
+                                </button>
+                                <div class="min-w-48 h-30 flex justify-center items-start ps-12 p-4 flex-col bg-orange rounded-2xl border-2 border-dark ms-8 z-10">
                                     <p class="text-xl font-bold text-white">Tambah</p>
                                     <p class="text-sm text-white">Menambahkan jadwal keberangkatan baru</p>                        
                                 </div>
@@ -82,41 +83,272 @@
                 </div>
                 <div class="flex flex-col gap-y-4">
                     <p class="text-xl font-bold text-dark border-b-2 pe-4 pb-2">Jadwal Keberangkatan</p>
-                    <div class="bg-yellow rounded-2xl border-2 border-dark p-4 flex flex-col gap-y-4">
-                        <div class="grid grid-cols-12 gap-x-2">
-                            <div class="col-span-1 w-full rounded-full items-center text-center bg-orange p-2 text-white font-bold border-2 border-dark">No</div>
-                            <div class="col-span-4 w-full rounded-full items-center text-center bg-orange p-2 text-white font-bold border-2 border-dark">Rute Perjalanan</div>
-                            <div class="col-span-4 w-full rounded-full items-center text-center bg-orange p-2 text-white font-bold border-2 border-dark">Jadwal Keberangkatan</div>
-                            <div class="col-span-2 w-full rounded-full items-center text-center bg-orange p-2 text-white font-bold border-2 border-dark">Jumlah Penumpang</div>
-                            <div class="col-span-1 w-full rounded-full items-center text-center bg-orange p-2 text-white font-bold border-2 border-dark">Aksi</div>
+                    <div class="min-lg:grid min-lg:grid-cols-14 w-full gap-x-2 max-lg:flex max-lg:flex-row max-lg:flex-wrap max-lg:gap-y-4 max-lg:pb-4">
+                        <div class="min-lg:col-span-1 flex flex-row w-auto relative items-center">
+                            <input placeholder="No" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-black/40 absolute left-2"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>                            
                         </div>
-                        <div class="bg-orange flex flex-col rounded-2xl border-2 border-dark">
-                            <!-- Baris 1-->
-                            <div class="grid grid-cols-12 border-b-2 border-dark">
-                                <div class="col-span-1 items-center text-center p-2 text-white font-bold border-e-2 border-dark">No</div>
-                                <div class="col-span-4 items-center text-center p-2 text-white font-bold border-e-2 border-dark">Rute Perjalanan</div>
-                                <div class="col-span-4 items-center text-center p-2 text-white font-bold border-e-2 border-dark">Jadwal Keberangkatan</div>
-                                <div class="col-span-2 items-center text-center p-2 text-white font-bold border-e-2 border-dark">Jumlah Penumpang</div>
-                                <div class="col-span-1 items-center text-center p-2 text-white font-bold ">Aksi</div>                                
-                            </div>
-                            <!-- Baris 2-->
-                            <div class="grid grid-cols-12 border-b-2 border-dark">
-                                <div class="col-span-1 items-center text-center p-2 text-white font-bold border-e-2 border-dark">No</div>
-                                <div class="col-span-4 items-center text-center p-2 text-white font-bold border-e-2 border-dark">Rute Perjalanan</div>
-                                <div class="col-span-4 items-center text-center p-2 text-white font-bold border-e-2 border-dark">Jadwal Keberangkatan</div>
-                                <div class="col-span-2 items-center text-center p-2 text-white font-bold border-e-2 border-dark">Jumlah Penumpang</div>
-                                <div class="col-span-1 items-center text-center p-2 text-white font-bold ">Aksi</div>                                
-                            </div>                            
-                            <!-- Baris 3-->
-                            <div class="grid grid-cols-12 ">
-                                <div class="col-span-1 items-center text-center p-2 text-white font-bold border-e-2 border-dark">No</div>
-                                <div class="col-span-4 items-center text-center p-2 text-white font-bold border-e-2 border-dark">Rute Perjalanan</div>
-                                <div class="col-span-4 items-center text-center p-2 text-white font-bold border-e-2 border-dark">Jadwal Keberangkatan</div>
-                                <div class="col-span-2 items-center text-center p-2 text-white font-bold border-e-2 border-dark">Jumlah Penumpang</div>
-                                <div class="col-span-1 items-center text-center p-2 text-white font-bold ">Aksi</div>                                
-                            </div>                            
+                        <div class="min-lg:col-span-3 flex flex-row relative items-center">
+                            <input placeholder="Nama Jadwal" class=" ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-black/40 absolute left-2"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>
                         </div>
+                        <div class="min-lg:col-span-3 flex flex-row relative items-center">
+                            <input placeholder="Rute Perjalanan" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-black/40 absolute left-2"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>
+                        </div>
+                        <div class="min-lg:col-span-2 flex flex-row relative items-center">
+                            <input placeholder="Nama Kapal" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-black/40 absolute left-2"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>
+                        </div>
+                        <div class="min-lg:col-span-3 flex flex-row relative items-center">
+                            <input placeholder="Jadwal Keberangkatan" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-black/40 absolute left-2"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>
+                        </div>
+                        <div class="min-lg:col-span-2 flex flex-row relative items-center">
+                            <input placeholder="Status" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-black/40 absolute left-2"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>
+                        </div>                        
                     </div>
+
+                    <!-- Tabel Desktop -->
+
+                    <table class="bg-yellow rounded-2xl border-2 border-dark p-4 flex flex-col gap-y-4 max-lg:hidden ">
+                        <tr class="grid grid-cols-14 gap-x-2">
+                            <th class="col-span-1 w-full rounded-full items-center text-center bg-orange p-2 text-white font-bold border-2 border-dark">No</th>
+                            <th class="col-span-3 w-full rounded-full items-center text-center bg-orange p-2 text-white font-bold border-2 border-dark">Nama Jadwal</th>
+                            <th class="col-span-3 w-full rounded-full items-center text-center bg-orange p-2 text-white font-bold border-2 border-dark">Rute</th>
+                            <th class="col-span-3 w-full rounded-full items-center text-center bg-orange p-2 text-white font-bold border-2 border-dark">Keberangkatan</th>
+                            <th class="col-span-2 w-full rounded-full items-center text-center bg-orange p-2 text-white font-bold border-2 border-dark">Status</th>
+                            <th class="col-span-2 w-full rounded-full items-center text-center bg-orange p-2 text-white font-bold border-2 border-dark">Detail</th>
+                        </tr>
+                        <tbody class="bg-orange flex flex-col rounded-2xl border-2 border-dark">
+                            <!-- Baris 1-->
+                            <tr class="grid grid-cols-14 items-center border-b-2 border-dark">
+                                <td class="col-span-1 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">1</td>
+                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">0112AB - Batam->Bintan</td>
+                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Telaga Punggur - Bandar Bentan Telani</td>
+                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">20 Oktober 2023, 08:00 WIB</td>
+                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Menunggu</td>
+                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold cursor-pointer">•••</td>                                
+                            </tr>
+                            <!-- Baris 2-->
+                            <tr class="grid grid-cols-14 items-center border-b-2 border-dark">
+                                <td class="col-span-1 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">2</td>
+                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">0112AB - Batam->Bintan</td>
+                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Telaga Punggur - Bandar Bentan Telani</td>
+                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">20 Oktober 2023, 08:00 WIB</td>
+                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Open Gate</td>
+                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold cursor-pointer">•••</td>                                
+                            </tr>                            
+                            <!-- Baris 3-->
+                            <tr class="grid grid-cols-14 items-center">
+                                <td class="col-span-1 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">3</td>
+                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">0112AB - Batam->Bintan</td>
+                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Telaga Punggur - Bandar Bentan Telani</td>
+                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">20 Oktober 2023, 08:00 WIB</td>
+                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Arrival Threshold</td>
+                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold cursor-pointer">•••</td>                                
+                            </tr>
+                        </tbody>
+                        <!-- Tidak Ada Data -->                        
+                        <tbody class="bg-orange rounded-2xl border-2 border-dark flex flex-col min-w-full min-h-60 gap-y-4 items-center justify-center">
+                            <tr><td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-24 h-24 fill-white"><path d="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM231 231C240.4 221.6 255.6 221.6 264.9 231L319.9 286L374.9 231C384.3 221.6 399.5 221.6 408.8 231C418.1 240.4 418.2 255.6 408.8 264.9L353.8 319.9L408.8 374.9C418.2 384.3 418.2 399.5 408.8 408.8C399.4 418.1 384.2 418.2 374.9 408.8L319.9 353.8L264.9 408.8C255.5 418.2 240.3 418.2 231 408.8C221.7 399.4 221.6 384.2 231 374.9L286 319.9L231 264.9C221.6 255.5 221.6 240.3 231 231z"/></svg></td></tr>
+                            <tr><td class="text-white font-bold text-xl">Tidak Ada Data</td></tr>
+                        </tbody>                         
+                    </table>
+
+                    <!-- Tabel Mobile -->
+
+                    <table class="min-lg:hidden bg-yellow rounded-xl border-2 border-dark p-4 flex flex-col gap-y-2">
+                        <!-- Baris 1 -->
+                        <tbody class="bg-white rounded-2xl border-2 border-dark flex flex-row justify-between">                            
+                            <tr class="flex flex-col items-start w-full">
+                                <td class="order-first text-start text-sm font-regular border-b-1 border-black flex flex-row justify-between w-full">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        No
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        1
+                                    </div>
+                                </td>
+                                <td class="order-1 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Nama Jadwal
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        Batam - Bintan Ferry
+                                    </div>
+                                </td>
+                                <td class="order-2 text-start text-sm font-regular border-b-1 border-black flex w-full">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Rute Perjalanan
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        Telaga Punggur - Bandar Bentan Telani
+                                    </div>
+                                </td>
+                                <td class="order-3 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Nama Kapal
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        KMP Serumpun Sebalai
+                                    </div>
+                                </td>
+                                <td class="order-4 text-start text-sm font-regular border-b-1 border-black flex w-full">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Jadwal Keberangkatan
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        20 Oktober 2023, 08:00 WIB
+                                    </div>
+                                </td>
+                                <td class="order-5 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Status
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        Menunggu
+                                    </div>
+                                </td>
+                                <td class="order-last text-start text-sm font-regular flex w-full">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Detail
+                                    </div>
+                                    <div class="items-start justify-start flex w-full py-2 px-2 font-bold">
+                                        <p class="flex p-1 bg-orange text-white rounded-full px-2 border-1 border-dark active:scale-90 transition-all duration-50">Detail</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!-- Baris 2 -->
+                        <tbody class="bg-white rounded-2xl border-2 border-dark flex flex-row justify-between">                            
+                            <tr class="flex flex-col items-start w-full">
+                                <td class="order-first text-start text-sm font-regular border-b-1 border-black flex flex-row justify-between w-full">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        No
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        2
+                                    </div>
+                                </td>
+                                <td class="order-1 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Nama Jadwal
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        Batam - Bintan Ferry
+                                    </div>
+                                </td>
+                                <td class="order-2 text-start text-sm font-regular border-b-1 border-black flex w-full">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Rute Perjalanan
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        Telaga Punggur - Bandar Bentan Telani
+                                    </div>
+                                </td>
+                                <td class="order-3 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Nama Kapal
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        KMP Serumpun Sebalai
+                                    </div>
+                                </td>
+                                <td class="order-4 text-start text-sm font-regular border-b-1 border-black flex w-full">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Jadwal Keberangkatan
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        20 Oktober 2023, 08:00 WIB
+                                    </div>
+                                </td>
+                                <td class="order-5 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Status
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        Open Gate
+                                    </div>
+                                </td>
+                                <td class="order-last text-start text-sm font-regular flex w-full">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Detail
+                                    </div>
+                                    <div class="items-start justify-start flex w-full py-2 px-2 font-bold">
+                                        <p class="flex p-1 bg-orange text-white rounded-full px-2 border-1 border-dark active:scale-90 transition-all duration-50">Detail</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!-- Baris 3 -->
+                        <tbody class="bg-white rounded-2xl border-2 border-dark flex flex-row justify-between">                            
+                            <tr class="flex flex-col items-start w-full">
+                                <td class="order-first text-start text-sm font-regular border-b-1 border-black flex flex-row justify-between w-full">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        No
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        3
+                                    </div>
+                                </td>
+                                <td class="order-1 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Nama Jadwal
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        Batam - Bintan Ferry
+                                    </div>
+                                </td>
+                                <td class="order-2 text-start text-sm font-regular border-b-1 border-black flex w-full">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Rute Perjalanan
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        Telaga Punggur - Bandar Bentan Telani
+                                    </div>
+                                </td>
+                                <td class="order-3 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Nama Kapal
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        KMP Serumpun Sebalai
+                                    </div>
+                                </td>
+                                <td class="order-4 text-start text-sm font-regular border-b-1 border-black flex w-full">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Jadwal Keberangkatan
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        20 Oktober 2023, 08:00 WIB
+                                    </div>
+                                </td>
+                                <td class="order-5 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Status
+                                    </div>
+                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                        Arrival Threshold
+                                    </div>
+                                </td>
+                                <td class="order-last text-start text-sm font-regular flex w-full">
+                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                        Detail
+                                    </div>
+                                    <div class="items-start justify-start flex w-full py-2 px-2 font-bold">
+                                        <p class="flex p-1 bg-orange text-white rounded-full px-2 border-1 border-dark active:scale-90 transition-all duration-50">Detail</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!-- Tidak Ada Data -->
+                        <tbody class="bg-white rounded-2xl border-2 border-dark flex flex-col min-w-full min-h-60 gap-y-4 items-center justify-center">
+                            <tr><td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-24 h-24 fill-dark"><path d="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM231 231C240.4 221.6 255.6 221.6 264.9 231L319.9 286L374.9 231C384.3 221.6 399.5 221.6 408.8 231C418.1 240.4 418.2 255.6 408.8 264.9L353.8 319.9L408.8 374.9C418.2 384.3 418.2 399.5 408.8 408.8C399.4 418.1 384.2 418.2 374.9 408.8L319.9 353.8L264.9 408.8C255.5 418.2 240.3 418.2 231 408.8C221.7 399.4 221.6 384.2 231 374.9L286 319.9L231 264.9C221.6 255.5 221.6 240.3 231 231z"/></svg></td></tr>
+                            <tr><td class="text-dark font-bold text-xl">Tidak Ada Data</td></tr>
+                        </tbody>                                                                 
+                    </table>
                 </div>
             </div>
             <div class="w-8 text-dark bg-[image:repeating-linear-gradient(315deg,currentColor_0,currentColor_1px,transparent_0,transparent_4%)]"></div>
