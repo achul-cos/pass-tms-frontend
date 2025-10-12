@@ -1,9 +1,9 @@
 import './bootstrap';
 
-import AOS from 'aos';
-import 'aos/dist/aos.css'; 
+import "../../node_modules/flyonui/dist/index.js";
 
-import 'flyonui/dist/index.js';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 AOS.init({
   // Global settings:
@@ -55,14 +55,3 @@ function clock() {
 
 // Jika kamu ingin pastikan Alpine bisa pakai fungsi ini:
 window.clock = clock;
-
-// import Alpine from 'alpinejs'
-// window.Alpine = Alpine
-// Alpine.start()
-
-// document.addEventListener('livewire:navigated', () => {
-//     // Saat komponen baru dimuat, aktifkan ulang Alpine
-//     Alpine.discoverUninitializedComponents((el) => {
-//         Alpine.initializeComponent(el)
-//     })
-// })

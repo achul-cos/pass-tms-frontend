@@ -1,4 +1,4 @@
-<main x-data="{ openSidebar: true, openMenu: false, openSidebarMobile: false}">
+<main x-data="{ openSidebar: true, openMenu: false, openSidebarMobile: false}" x-init="$watch('openSidebarMobile', val => document.body.classList.toggle('overflow-hidden', val))">
 
     <nav class="bg-white fixed top-0 z-10 border-4 border-dark w-screen h-24 max-md:hidden min-md:block">
         <div class="h-full p-4 flex flex-row justify-between items-center transition-all duration-500 ms-46" :class="openSidebar ? 'ms-46' : '!ms-0'">
@@ -43,7 +43,8 @@
         </div>
     </nav>     
 
-    <aside class="bg-yellow border-4 z-10 border-dark fixed top-0 left-0 h-full w-48 max-md:hidden"
+    <aside
+        x-cloak
         x-show="openSidebar"
         x-transition:enter="transform transition ease-in-out duration-500"
         x-transition:enter-start="-translate-x-full"
@@ -51,8 +52,7 @@
         x-transition:leave="transform transition ease-in-out duration-500"
         x-transition:leave-start="translate-x-0 opacity-100"
         x-transition:leave-end="-translate-x-full"
-        class="bg-yellow border-4 border-dark fixed top-0 left-0 h-full w-48 z-40 shadow-lg"
-        style="display:none">
+        class="bg-yellow border-4 border-dark fixed top-0 left-0 h-full w-48 z-40 shadow-lg max-md:hidden">
         <div class="w-full h-full flex flex-col">
             <div class="items-center p-4 h-22.5">
                 <img src="{{ asset('img\logo\icon-emblem-horizon-cream.png') }}" alt="" class="h-auto w-36 translate-y-2" data-aos="flip-left">
@@ -108,6 +108,8 @@
         x-transition:enter-end="translate-x-0 opacity-100"
         x-transition:leave="transform transition ease-in-out duration-500"
         x-transition:leave-start="translate-x-0 opacity-100"
+        x-cloak
+        @click.outside="openSidebarMobile = false"
         x-transition:leave-end="-translate-x-full">
         <div class="w-full h-full flex flex-col">
             <div class="items-center p-4 h-22.5">
@@ -156,7 +158,12 @@
         </div>
     </aside>    
 
-    <menu x-show="openMenu" @click.outside="openMenu = false" x-transition class="fixed top-28 right-4 w-48 h z-40 bg-white rounded-2xl border-2 border-dark shadow-xl">
+    <menu
+    x-show="openMenu"
+    x-cloak
+    @click.outside="openMenu = false"
+    x-transition
+    class="fixed top-28 right-4 w-48 z-40 bg-white rounded-2xl border-2 border-dark shadow-xl">        
         <div class="p-4 text-dark">
             <p class="font-bold text-2xl">
                 Admin
