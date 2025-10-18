@@ -1,6 +1,10 @@
-<main class="h-full w-full"">
+<div class="h-full w-full">
 
-    <livewire:dashboard.modal-tambah-jadwal />
+    <livewire:modals.modal-tambah-jadwal />
+    <livewire:modals.modal-edit-jadwal />
+    <livewire:modals.modal-berhasil />
+    <livewire:modals.modal-gagal />
+    <livewire:modals.modal-info />
     <livewire:dashboard.sidebar />    
 
     <div class="relative w-full z-0 min-h-[calc(100vh)] pt-28 flex flex-col bg-cover bg-no-repeat bg-top-right overflow-hidden transition-all duration-500 max-md:ps-0 min-md:ps-48"
@@ -13,6 +17,17 @@
             <p class="text-2xl font-bold">Kelola Jadwal Keberangkatan</p>
             <p class="text-sm">Menambahkan jadwal keberangkatan yang baru, mengubah dan memantau status jadwal.</p>
         </div>
+
+        <!-- Testing Modal -->
+        <!-- <flux:modal.trigger name="modal-berhasil">
+            <flux:button>Berhasil</flux:button>
+        </flux:modal.trigger>
+        <flux:modal.trigger name="modal-gagal">
+            <flux:button>Gagal</flux:button>
+        </flux:modal.trigger>        
+        <flux:modal.trigger name="modal-info">
+            <flux:button>Info</flux:button>
+        </flux:modal.trigger>         -->
 
         <!-- Konten Utama -->
         <div class="flex flex-row justify-between w-full flex-1 border-b-2 z-10 border-dark">
@@ -69,15 +84,15 @@
                     <div class="w-full flex flex-col gap-y-4">
                         <p class="text-xl font-bold text-dark border-b-2 pe-4 pb-2">Aksi Cepat</p>
                         <div class="flex flex-row flex-wrap gap-4">
-                            <div class="flex items-center">
-                                <button data-overlay="#modalTambahJadwal" class="absolute flex items-center justify-center w-16 h-16 rounded-full bg-yellow border-2 border-dark z-20 ring-4 ring-white hover:scale-110 active:scale-95 transition-all duration-200 ease-in-out">
+                            <flux:modal.trigger name="modal-tambah-jadwal" class="flex items-center">
+                                <flux:button class="absolute! flex items-center justify-center w-16 h-16 rounded-full! bg-yellow hover:bg-orange! border-2 border-dark! z-20 ring-4 ring-white hover:scale-110 active:scale-95 transition-all duration-200 ease-in-out">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-12 h-12 fill-black"><path d="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM296 408L296 344L232 344C218.7 344 208 333.3 208 320C208 306.7 218.7 296 232 296L296 296L296 232C296 218.7 306.7 208 320 208C333.3 208 344 218.7 344 232L344 296L408 296C421.3 296 432 306.7 432 320C432 333.3 421.3 344 408 344L344 344L344 408C344 421.3 333.3 432 320 432C306.7 432 296 421.3 296 408z"/></svg>
-                                </button>
+                                </flux:button>
                                 <div class="min-w-48 h-30 flex justify-center items-start ps-12 p-4 flex-col bg-orange rounded-2xl border-2 border-dark ms-8 z-10">
                                     <p class="text-xl font-bold text-white">Tambah</p>
                                     <p class="text-sm text-white">Menambahkan jadwal keberangkatan baru</p>                        
                                 </div>
-                            </div>
+                            </flux:modal.trigger>
                         </div>
                     </div>
                 </div>
@@ -129,7 +144,11 @@
                                 <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Telaga Punggur - Bandar Bentan Telani</td>
                                 <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">20 Oktober 2023, 08:00 WIB</td>
                                 <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Menunggu</td>
-                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold cursor-pointer">•••</td>                                
+                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold cursor-pointer">
+                                    <flux:modal.trigger name="modal-edit-jadwal">
+                                        <flux:button class="bg-transparent! border-none! text-white! shadow-none! text-xl!">•••</flux:button>
+                                    </flux:modal.trigger>
+                                </td>     
                             </tr>
                             <!-- Baris 2-->
                             <tr class="grid grid-cols-14 items-center border-b-2 border-dark">
@@ -138,7 +157,11 @@
                                 <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Telaga Punggur - Bandar Bentan Telani</td>
                                 <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">20 Oktober 2023, 08:00 WIB</td>
                                 <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Open Gate</td>
-                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold cursor-pointer">•••</td>                                
+                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold cursor-pointer">
+                                    <flux:modal.trigger name="modal-edit-jadwal">
+                                        <flux:button class="bg-transparent! border-none! text-white! shadow-none! text-xl!">•••</flux:button>
+                                    </flux:modal.trigger>
+                                </td>                                
                             </tr>                            
                             <!-- Baris 3-->
                             <tr class="grid grid-cols-14 items-center">
@@ -147,7 +170,11 @@
                                 <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Telaga Punggur - Bandar Bentan Telani</td>
                                 <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">20 Oktober 2023, 08:00 WIB</td>
                                 <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Arrival Threshold</td>
-                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold cursor-pointer">•••</td>                                
+                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold cursor-pointer">
+                                    <flux:modal.trigger name="modal-edit-jadwal">
+                                        <flux:button class="bg-transparent! border-none! text-white! shadow-none! text-xl!">•••</flux:button>
+                                    </flux:modal.trigger>                                    
+                                </td>                                
                             </tr>
                         </tbody>
                         <!-- Tidak Ada Data -->                        
@@ -215,9 +242,9 @@
                                     <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
                                         Detail
                                     </div>
-                                    <div class="items-start justify-start flex w-full py-2 px-2 font-bold">
-                                        <p class="flex p-1 bg-orange text-white rounded-full px-2 border-1 border-dark active:scale-90 transition-all duration-50">Detail</p>
-                                    </div>
+                                    <flux:modal.trigger name="modal-edit-jadwal" class="items-start! justify-start! flex! w-full! py-2! px-2! font-bold!">
+                                        <flux:button class="flex! py-1! bg-orange! text-white! rounded-full! px-2! border-1! border-dark! active:scale-90! transition-all! duration-50! font-bold!">Detail</flux:button>
+                                    </flux:modal.trigger>
                                 </td>
                             </tr>
                         </tbody>
@@ -276,9 +303,9 @@
                                     <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
                                         Detail
                                     </div>
-                                    <div class="items-start justify-start flex w-full py-2 px-2 font-bold">
-                                        <p class="flex p-1 bg-orange text-white rounded-full px-2 border-1 border-dark active:scale-90 transition-all duration-50">Detail</p>
-                                    </div>
+                                    <flux:modal.trigger name="modal-edit-jadwal" class="items-start! justify-start! flex! w-full! py-2! px-2! font-bold!">
+                                        <flux:button class="flex! py-1! bg-orange! text-white! rounded-full! px-2! border-1! border-dark! active:scale-90! transition-all! duration-50! font-bold!">Detail</flux:button>
+                                    </flux:modal.trigger>
                                 </td>
                             </tr>
                         </tbody>
@@ -337,9 +364,9 @@
                                     <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
                                         Detail
                                     </div>
-                                    <div class="items-start justify-start flex w-full py-2 px-2 font-bold">
-                                        <p class="flex p-1 bg-orange text-white rounded-full px-2 border-1 border-dark active:scale-90 transition-all duration-50">Detail</p>
-                                    </div>
+                                    <flux:modal.trigger name="modal-edit-jadwal" class="items-start! justify-start! flex! w-full! py-2! px-2! font-bold!">
+                                        <flux:button class="flex! py-1! bg-orange! text-white! rounded-full! px-2! border-1! border-dark! active:scale-90! transition-all! duration-50! font-bold!">Detail</flux:button>
+                                    </flux:modal.trigger>
                                 </td>
                             </tr>
                         </tbody>
@@ -355,4 +382,4 @@
         </div>
     </div>
 
-</main>
+</div>

@@ -1,12 +1,16 @@
 @import 'tailwindcss';
 
+@plugin "flyonui";
+@import "../../node_modules/flyonui/variants.css";
+@import "../../node_modules/flatpickr/dist/flatpickr.css";
+@import "../../node_modules/flyonui/src/vendor/flatpickr.css";
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
-@plugin "flyonui";
-@import "../../node_modules/flyonui/variants.css"; /* Require only if you want to use FlyonUI JS component */
+@import '../../vendor/livewire/flux/dist/flux.css';
 
 @import '../../node_modules/aos/dist/aos.css';
 
@@ -68,4 +72,22 @@
   input[type="password"]::-moz-password-toggle {
     display: none;
   }
+
+  /* Untuk Chrome, Safari, Edge, dan Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Untuk Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }  
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }  
 }

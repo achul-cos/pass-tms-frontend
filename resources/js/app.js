@@ -1,9 +1,9 @@
 import './bootstrap';
 
-import "../../node_modules/flyonui/dist/index.js";
-
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
+import '../../node_modules/flatpickr/dist/flatpickr.js';
 
 AOS.init({
   // Global settings:
@@ -55,3 +55,18 @@ function clock() {
 
 // Jika kamu ingin pastikan Alpine bisa pakai fungsi ini:
 window.clock = clock;
+
+document.addEventListener('DOMContentLoaded', formatHargaInput);
+document.addEventListener('livewire:navigated', formatHargaInput);
+document.addEventListener('livewire:load', formatHargaInput);
+
+function formatHargaInput() {
+    const inputs = document.querySelectorAll('#hargaInput, .harga-input');
+
+    inputs.forEach(input => {
+        input.addEventListener('input', function () {
+            let value = this.value.replace(/[^\d]/g, '');
+            this.value = value ? new Intl.NumberFormat('id-ID').format(value) : '';
+        });
+    });
+}

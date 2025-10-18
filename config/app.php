@@ -131,5 +131,14 @@ return [
     */
 
     'favicon' => env('APP_FAVICON', 'img/logo/icon-emblem-square.png'),
+    
+    /*
+    |--------------------------------------------------------------------------
+    | NoCaptcha
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
 
 ];
