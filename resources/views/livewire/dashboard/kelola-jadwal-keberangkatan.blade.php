@@ -1,10 +1,8 @@
 <div class="h-full w-full">
 
+
     <livewire:modals.modal-tambah-jadwal />
     <livewire:modals.modal-edit-jadwal />
-    <livewire:modals.modal-berhasil />
-    <livewire:modals.modal-gagal />
-    <livewire:modals.modal-info />
     <livewire:dashboard.sidebar />    
 
     <div class="relative w-full z-0 min-h-[calc(100vh)] pt-28 flex flex-col bg-cover bg-no-repeat bg-top-right overflow-hidden transition-all duration-500 max-md:ps-0 min-md:ps-48"

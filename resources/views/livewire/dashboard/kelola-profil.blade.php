@@ -20,24 +20,24 @@
                 <p class="w-full text-xl font-bold text-dark border-b-2 pe-4 pb-2">Nama Pengguna</p>
                 <div class="w-full relative">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-6 h-6 absolute left-4 top-2 fill-dark"><path d="M320 312C386.3 312 440 258.3 440 192C440 125.7 386.3 72 320 72C253.7 72 200 125.7 200 192C200 258.3 253.7 312 320 312zM290.3 368C191.8 368 112 447.8 112 546.3C112 562.7 125.3 576 141.7 576L498.3 576C514.7 576 528 562.7 528 546.3C528 447.8 448.2 368 349.7 368L290.3 368z"/></svg>
-                    <input type="text" name="nama" class="p-2 bg-dark/20 rounded-full outline-none border-2 border-dark px-4 ps-12 min-md:w-[calc(100vw*0.5)] max-md:w-full">
+                    <input required type="text" name="nama" class="p-2 bg-dark/20 rounded-full outline-none border-2 border-dark px-4 ps-12 min-md:w-[calc(100vw*0.5)] max-md:w-full">
                 </div>
                 <p class="w-full text-xl font-bold text-dark border-b-2 pe-4 pb-2">Nomor telepon</p>
                 <div class="w-full relative">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-6 h-6 absolute left-4 top-2 fill-dark"><path d="M224.2 89C216.3 70.1 195.7 60.1 176.1 65.4L170.6 66.9C106 84.5 50.8 147.1 66.9 223.3C104 398.3 241.7 536 416.7 573.1C493 589.3 555.5 534 573.1 469.4L574.6 463.9C580 444.2 569.9 423.6 551.1 415.8L453.8 375.3C437.3 368.4 418.2 373.2 406.8 387.1L368.2 434.3C297.9 399.4 241.3 341 208.8 269.3L253 233.3C266.9 222 271.6 202.9 264.8 186.3L224.2 89z"/></svg>
-                    <input type="number" name="telepon" class="p-2 bg-dark/20 rounded-full outline-none border-2 border-dark px-4 ps-12 min-md:w-[calc(100vw*0.5)] max-md:w-full">
+                    <input type="number" name="telepon" minlength="8" required class="p-2 bg-dark/20 rounded-full outline-none border-2 border-dark px-4 ps-12 min-md:w-[calc(100vw*0.5)] max-md:w-full">
                 </div>                
                 <p class="w-full text-xl font-bold text-dark border-b-2 pe-4 pb-2">Ganti Kata Sandi</p>
                 <div class="w-full flex min-md:flex-row gap-4 max-md:flex-col">
                     <div class="w-full relative flex flex-col gap-4">
                         <p class="text-sm text-black">Kata Sandi Sebelumnya</p>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-6 h-6 absolute left-4 top-11 fill-dark"><path d="M400 416C497.2 416 576 337.2 576 240C576 142.8 497.2 64 400 64C302.8 64 224 142.8 224 240C224 258.7 226.9 276.8 232.3 293.7L71 455C66.5 459.5 64 465.6 64 472L64 552C64 565.3 74.7 576 88 576L168 576C181.3 576 192 565.3 192 552L192 512L232 512C245.3 512 256 501.3 256 488L256 448L296 448C302.4 448 308.5 445.5 313 441L346.3 407.7C363.2 413.1 381.3 416 400 416zM440 160C462.1 160 480 177.9 480 200C480 222.1 462.1 240 440 240C417.9 240 400 222.1 400 200C400 177.9 417.9 160 440 160z"/></svg>                        
-                        <input type="text" name="password" class="p-2 bg-dark/20 w-full rounded-full outline-none border-2 border-dark px-4 ps-12">
+                        <input required type="password" name="password" class="p-2 bg-dark/20 w-full rounded-full outline-none border-2 border-dark px-4 ps-12">
                     </div>
                     <div class="w-full relative flex flex-col gap-4">
                         <p class="text-sm text-black">Kata Sandi Terbaru</p>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-6 h-6 absolute left-4 top-11 fill-dark"><path d="M400 416C497.2 416 576 337.2 576 240C576 142.8 497.2 64 400 64C302.8 64 224 142.8 224 240C224 258.7 226.9 276.8 232.3 293.7L71 455C66.5 459.5 64 465.6 64 472L64 552C64 565.3 74.7 576 88 576L168 576C181.3 576 192 565.3 192 552L192 512L232 512C245.3 512 256 501.3 256 488L256 448L296 448C302.4 448 308.5 445.5 313 441L346.3 407.7C363.2 413.1 381.3 416 400 416zM440 160C462.1 160 480 177.9 480 200C480 222.1 462.1 240 440 240C417.9 240 400 222.1 400 200C400 177.9 417.9 160 440 160z"/></svg>                        
-                        <input type="text" name="passwordConfirmation" class="p-2 bg-dark/20 w-full rounded-full outline-none border-2 border-dark px-4 ps-12">
+                        <input required type="password" name="passwordConfirmation" class="p-2 bg-dark/20 w-full rounded-full outline-none border-2 border-dark px-4 ps-12">
                     </div>
                 </div>
                 <div class="flex min-md:flex-row max-md:flex-col w-full min-md:gap-4 max-md:gap-8">
@@ -72,9 +72,9 @@
                         </div>
                     </div>
                     <div class="w-full justify-end flex flex-col gap-2 min-md:items-end max-md:items-start">
-                        <div class="bg-orange text-white font-bold px-4 p-2 rounded-full border-black border-2 text-xl transition-all duration-200 active:scale-80">
+                        <button class="bg-orange text-white cursor-pointer active:bg-dark/80 disabled:bg-gray-500 disabled:opacity-45 disabled:transition-none disabled:hover:scale-100 disabled:cursor-not-allowed font-bold px-4 p-2 rounded-full border-black border-2 text-xl transition-all duration-200 active:scale-80">
                             Simpan
-                        </div>
+                        </button>
                     </div>
                 </div>
             </form>

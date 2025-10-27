@@ -11,6 +11,9 @@
         @fluxAppearance
     </head>
     <body class="antialiased bg-white text-black min-h-screen" x-data="{ sidebarOpen: true }" x-init="window.addEventListener('sidebar-toggled', e => sidebarOpen = e.detail)">
+        <livewire:modals.modal-berhasil />
+        <livewire:modals.modal-gagal />
+        <livewire:modals.modal-info />        
         {{ $slot }}
         @vite('resources/js/app.js')
         @fluxScripts
