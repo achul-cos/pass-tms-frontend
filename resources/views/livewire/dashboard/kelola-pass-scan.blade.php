@@ -51,6 +51,15 @@
                         </div>
                     </div>
                 </div>
+
+                <iframe 
+                    src="http://10.20.30.123:8889/stream/" 
+                    width="640" 
+                    height="480"
+                    allow="autoplay"
+                    style="border:none;">
+                </iframe>
+
                 <div class="flex flex-col gap-y-4">
                     <p class="text-xl font-bold text-dark border-b-2 pe-4 pb-2">Log Aktivitas</p>
                     <div class="min-lg:grid min-lg:grid-cols-14 w-full gap-x-2 max-lg:flex max-lg:flex-row max-lg:flex-wrap max-lg:gap-y-4 max-lg:pb-4">

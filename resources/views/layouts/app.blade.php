@@ -9,13 +9,24 @@
         <title>{{ $title ?? config('app.name') }}</title>
         @vite('resources/css/app.css')
         @fluxAppearance
+        @livewireStyles
     </head>
     <body class="antialiased bg-white text-black min-h-screen" x-data="{ sidebarOpen: true }" x-init="window.addEventListener('sidebar-toggled', e => sidebarOpen = e.detail)">
         <livewire:modals.modal-berhasil />
         <livewire:modals.modal-gagal />
-        <livewire:modals.modal-info />        
-        {{ $slot }}
+        <livewire:modals.modal-info />         
+        <div class="w-full h-full">
+            <!-- {{-- Global Loading Overlay --}}
+            <div wire:loading class="fixed inset-0 z-[9999] bg-black/40 flex items-center justify-center">
+                <livewire:loading />
+            </div> -->
+
+            <livewire:dashboard.sidebar :key="'sidebar'"/>    
+            <livewire:modals.modal-tiket :key="'modal-tiket'"/>
+            {{ $slot }}
+        </div>        
         @vite('resources/js/app.js')
         @fluxScripts
+        @livewireScripts
     </body>
 </html>
