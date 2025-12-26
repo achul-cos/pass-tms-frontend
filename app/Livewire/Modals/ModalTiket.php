@@ -18,78 +18,82 @@ class ModalTiket extends Component
 
     public function fetchTikets(): void
     {
-        $response = Http::get(config('services.api.base_url') . '/api/v1/tikets');
 
-        $raw = $response->json('data') ?? [];
+        try {
+            $response = Http::get(config('services.api.base_url') . '/api/v1/tikets');
 
-        $this->tikets = collect($raw)->map(function ($t) {
-            if ($t['status'] === 'menunggu_verifikasi'){
-                $status = 'Menunggu Verifikasi';
-            } elseif ($t['status'] === 'terverifikasi'){
-                $status = 'Terverifikasi';
-            } elseif ($t['status'] === 'dibatalkan'){
-                $status = 'Dibatalkan';
-            } else {
-                $status = null;
-            }
+            $raw = $response->json('data') ?? [];
 
-            $pemesanNama = $t['penumpang']['nama'] ?? '-';
-            $pemesanTelp = $t['penumpang']['nomorTelepon'] ?? '-';
+            $this->tikets = collect($raw)->map(function ($t) {
+                if ($t['status'] === 'menunggu_verifikasi'){
+                    $status = 'Menunggu Verifikasi';
+                } elseif ($t['status'] === 'terverifikasi'){
+                    $status = 'Terverifikasi';
+                } elseif ($t['status'] === 'dibatalkan'){
+                    $status = 'Dibatalkan';
+                } else {
+                    $status = null;
+                }
 
-            $kodeUnik = $t['kodeUnik'] ?? '';
-            $biayaTiket = $t['biaya_tiket'] ?? null;
+                $pemesanNama = $t['penumpang']['nama'] ?? '-';
+                $pemesanTelp = $t['penumpang']['nomorTelepon'] ?? '-';
 
-            $jadwal = $t['jadwal'] ?? [];
-            $rute = ($jadwal['namaJadwal'] ?? '-');
-            $asal = ($jadwal['lokasiBerangkat'] ?? '-');
-            $tujuan = ($jadwal['lokasiTiba'] ?? '-');
+                $kodeUnik = $t['kodeUnik'] ?? '';
+                $biayaTiket = $t['biayaTiket'] ?? null;
 
-            $waktuBerangkat = Carbon::parse($jadwal['waktuBerangkat']) ?? null;
-            $tanggalKeberangkatan = $waktuBerangkat->isoFormat('dddd, D MMMM Y') ?? '-';
-            $waktuKeberangkatan = $waktuBerangkat->format('H:i:s') . ' WIB';
+                $jadwal = $t['jadwal'] ?? [];
+                $rute = ($jadwal['namaJadwal'] ?? '-');
+                $asal = ($jadwal['lokasiBerangkat'] ?? '-');
+                $tujuan = ($jadwal['lokasiTiba'] ?? '-');
 
-            $openGate = $waktuBerangkat->copy()->subHours(2)->format('H:i:s') . ' WIB';
-            $arrivalThreshold = $waktuBerangkat->copy()->subMinutes(15)->format('H:i:s') . ' WIB';
+                $waktuBerangkat = Carbon::parse($jadwal['waktuBerangkat']) ?? null;
+                $tanggalKeberangkatan = $waktuBerangkat->isoFormat('dddd, D MMMM Y') ?? '-';
+                $waktuKeberangkatan = $waktuBerangkat->format('H:i:s') . ' WIB';
 
-            $waktuTiba = Carbon::parse($jadwal['waktuTiba']) ?? null;
-            $tanggalSampai = $waktuTiba->isoFormat('dddd, D MMMM Y') ?? '-';
-            $waktuSampai = $waktuTiba->format('H:i:s') . ' WIB';
-            
-            $namaKapal = $jadwal['namaKapal'] ?? '-';
+                $openGate = $waktuBerangkat->copy()->subHours(2)->format('H:i:s') . ' WIB';
+                $arrivalThreshold = $waktuBerangkat->copy()->subMinutes(15)->format('H:i:s') . ' WIB';
 
-            $jenisKendaraan = $t['jenisKendaraan'] ?? '-';
+                $waktuTiba = Carbon::parse($jadwal['waktuTiba']) ?? null;
+                $tanggalSampai = $waktuTiba->isoFormat('dddd, D MMMM Y') ?? '-';
+                $waktuSampai = $waktuTiba->format('H:i:s') . ' WIB';
+                
+                $namaKapal = $jadwal['namaKapal'] ?? '-';
 
-            $jenisKendaraan = isset($t['jenisKendaraan']) ? Str::ucfirst(Str::lower($t['jenisKendaraan'])) : '-';
-            $nomorKendaraan = $t['nomorKendaraan'] ?? '-';
+                $jenisKendaraan = $t['jenisKendaraan'] ?? '-';
 
-            $penumpangList = $t['penumpangList'] ?? [];
+                $jenisKendaraan = isset($t['jenisKendaraan']) ? Str::ucfirst(Str::lower($t['jenisKendaraan'])) : '-';
+                $nomorKendaraan = $t['nomorKendaraan'] ?? '-';
 
-            // return tiket yang sudah siap dipakai Blade
-            return [
-                'id' => $t['id'] ?? null,
-                'status' => $status,
-                'pemesanNama' => $pemesanNama,
-                'pemesanTelp' => $pemesanTelp,
-                'kodeUnik' => $kodeUnik,
-                'biayaTiket' => $biayaTiket,
-                'biayaTiketFormatted' => $biayaTiket !== null
-                    ? 'Rp. ' . number_format($biayaTiket, 0, ',', '.')
-                    : '-',
-                'rute' => $rute,
-                'asal' => $asal,
-                'tujuan' => $tujuan,
-                'tanggalKeberangkatan' => $tanggalKeberangkatan,
-                'waktuKeberangkatan' => $waktuKeberangkatan,
-                'openGate' => $openGate,
-                'arrivalThreshold' => $arrivalThreshold,
-                'tanggalSampai' => $tanggalSampai,
-                'waktuSampai' => $waktuSampai,
-                'namaKapal' => $namaKapal,
-                'jenisKendaraan' => $jenisKendaraan,
-                'nomorKendaraan' => $nomorKendaraan,
-                'penumpangList' => $penumpangList,
-            ];
-        })->all();
+                $penumpangList = $t['penumpangList'] ?? [];
+
+                return [
+                    'id' => $t['id'] ?? null,
+                    'status' => $status,
+                    'pemesanNama' => $pemesanNama,
+                    'pemesanTelp' => $pemesanTelp,
+                    'kodeUnik' => $kodeUnik,
+                    'biayaTiket' => $biayaTiket,
+                    'biayaTiketFormatted' => $biayaTiket !== null
+                        ? 'Rp. ' . number_format($biayaTiket, 0, ',', '.')
+                        : '-',
+                    'rute' => $rute,
+                    'asal' => $asal,
+                    'tujuan' => $tujuan,
+                    'tanggalKeberangkatan' => $tanggalKeberangkatan,
+                    'waktuKeberangkatan' => $waktuKeberangkatan,
+                    'openGate' => $openGate,
+                    'arrivalThreshold' => $arrivalThreshold,
+                    'tanggalSampai' => $tanggalSampai,
+                    'waktuSampai' => $waktuSampai,
+                    'namaKapal' => $namaKapal,
+                    'jenisKendaraan' => $jenisKendaraan,
+                    'nomorKendaraan' => $nomorKendaraan,
+                    'penumpangList' => $penumpangList,
+                ];
+            })->all();            
+        } catch (\Throwable $th) {
+            $this->dispatch('modal-gagal', message: 'Maaf Data Tiket Tidak Dapat DiTampilkan, Karena Terdapat Gangguan Di Server, Silahkan Hubungi Teknisi', title: 'Gagal Menampilkan Tiket Penumpang');               
+        }
     }
 
     public function render()

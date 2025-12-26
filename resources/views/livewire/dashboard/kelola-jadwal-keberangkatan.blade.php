@@ -1,10 +1,5 @@
-<div class="h-full w-full">
-
-
-    <livewire:modals.modal-tambah-jadwal />
-    <livewire:modals.modal-edit-jadwal />
-    <livewire:dashboard.sidebar />    
-
+<div class="h-full w-full">  
+    
     <div class="relative w-full z-0 min-h-[calc(100vh)] pt-28 flex flex-col bg-cover bg-no-repeat bg-top-right overflow-hidden transition-all duration-500 max-md:ps-0 min-md:ps-48"
          :class="sidebarOpen ? 'min-md:!ps-48 max-md:!ps-0' : 'min-md:!ps-0 max-md:!ps-0'">
         <!-- Background -->
@@ -15,17 +10,6 @@
             <p class="text-2xl font-bold">Kelola Jadwal Keberangkatan</p>
             <p class="text-sm">Menambahkan jadwal keberangkatan yang baru, mengubah dan memantau status jadwal.</p>
         </div>
-
-        <!-- Testing Modal -->
-        <!-- <flux:modal.trigger name="modal-berhasil">
-            <flux:button>Berhasil</flux:button>
-        </flux:modal.trigger>
-        <flux:modal.trigger name="modal-gagal">
-            <flux:button>Gagal</flux:button>
-        </flux:modal.trigger>        
-        <flux:modal.trigger name="modal-info">
-            <flux:button>Info</flux:button>
-        </flux:modal.trigger>         -->
 
         <!-- Konten Utama -->
         <div class="flex flex-row justify-between w-full flex-1 border-b-2 z-10 border-dark">
@@ -98,27 +82,27 @@
                     <p class="text-xl font-bold text-dark border-b-2 pe-4 pb-2">Jadwal Keberangkatan</p>
                     <div class="min-lg:grid min-lg:grid-cols-14 w-full gap-x-2 max-lg:flex max-lg:flex-row max-lg:flex-wrap max-lg:gap-y-4 max-lg:pb-4">
                         <div class="min-lg:col-span-1 flex flex-row w-auto relative items-center">
-                            <input placeholder="No" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
+                            <input wire:model.live.debounce.500ms="filterNo" placeholder="No" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-black/40 absolute left-2"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>                            
                         </div>
                         <div class="min-lg:col-span-3 flex flex-row relative items-center">
-                            <input placeholder="Nama Jadwal" class=" ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
+                            <input wire:model.live.debounce.500ms="filterNamaJadwal" placeholder="Nama Jadwal" class=" ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-black/40 absolute left-2"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>
                         </div>
                         <div class="min-lg:col-span-3 flex flex-row relative items-center">
-                            <input placeholder="Rute Perjalanan" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
+                            <input wire:model.live.debounce.500ms="filterRute" placeholder="Rute Perjalanan" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-black/40 absolute left-2"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>
                         </div>
                         <div class="min-lg:col-span-2 flex flex-row relative items-center">
-                            <input placeholder="Nama Kapal" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
+                            <input wire:model.live.debounce.500ms="filterNamaKapal" placeholder="Nama Kapal" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-black/40 absolute left-2"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>
                         </div>
                         <div class="min-lg:col-span-3 flex flex-row relative items-center">
-                            <input placeholder="Jadwal Keberangkatan" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
+                            <input wire:model.live.debounce.500ms="filterJadwalBerangkat" placeholder="Jadwal Keberangkatan" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-black/40 absolute left-2"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>
                         </div>
                         <div class="min-lg:col-span-2 flex flex-row relative items-center">
-                            <input placeholder="Status" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
+                            <input wire:model.live.debounce.500ms="filterStatus" placeholder="Status" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-black/40 absolute left-2"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>
                         </div>                        
                     </div>
@@ -134,245 +118,167 @@
                             <th class="col-span-2 w-full rounded-full items-center text-center bg-orange p-2 text-white font-bold border-2 border-dark">Status</th>
                             <th class="col-span-2 w-full rounded-full items-center text-center bg-orange p-2 text-white font-bold border-2 border-dark">Detail</th>
                         </tr>
-                        <tbody class="bg-orange flex flex-col rounded-2xl border-2 border-dark">
-                            <!-- Baris 1-->
-                            <tr class="grid grid-cols-14 items-center border-b-2 border-dark">
-                                <td class="col-span-1 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">1</td>
-                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">0112AB - Batam->Bintan</td>
-                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Telaga Punggur - Bandar Bentan Telani</td>
-                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">20 Oktober 2023, 08:00 WIB</td>
-                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Menunggu</td>
-                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold cursor-pointer">
-                                    <flux:modal.trigger name="modal-edit-jadwal">
-                                        <flux:button class="bg-transparent! border-none! text-white! shadow-none! text-xl!">•••</flux:button>
-                                    </flux:modal.trigger>
-                                </td>     
-                            </tr>
-                            <!-- Baris 2-->
-                            <tr class="grid grid-cols-14 items-center border-b-2 border-dark">
-                                <td class="col-span-1 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">2</td>
-                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">0112AB - Batam->Bintan</td>
-                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Telaga Punggur - Bandar Bentan Telani</td>
-                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">20 Oktober 2023, 08:00 WIB</td>
-                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Open Gate</td>
-                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold cursor-pointer">
-                                    <flux:modal.trigger name="modal-edit-jadwal">
-                                        <flux:button class="bg-transparent! border-none! text-white! shadow-none! text-xl!">•••</flux:button>
-                                    </flux:modal.trigger>
-                                </td>                                
-                            </tr>                            
-                            <!-- Baris 3-->
-                            <tr class="grid grid-cols-14 items-center">
-                                <td class="col-span-1 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">3</td>
-                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">0112AB - Batam->Bintan</td>
-                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Telaga Punggur - Bandar Bentan Telani</td>
-                                <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">20 Oktober 2023, 08:00 WIB</td>
-                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold border-e-2 border-dark">Arrival Threshold</td>
-                                <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-white font-bold cursor-pointer">
-                                    <flux:modal.trigger name="modal-edit-jadwal">
-                                        <flux:button class="bg-transparent! border-none! text-white! shadow-none! text-xl!">•••</flux:button>
-                                    </flux:modal.trigger>                                    
-                                </td>                                
-                            </tr>
-                        </tbody>
-                        <!-- Tidak Ada Data -->                        
-                        <tbody class="bg-orange rounded-2xl border-2 border-dark flex flex-col min-w-full min-h-60 gap-y-4 items-center justify-center">
-                            <tr><td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-24 h-24 fill-white"><path d="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM231 231C240.4 221.6 255.6 221.6 264.9 231L319.9 286L374.9 231C384.3 221.6 399.5 221.6 408.8 231C418.1 240.4 418.2 255.6 408.8 264.9L353.8 319.9L408.8 374.9C418.2 384.3 418.2 399.5 408.8 408.8C399.4 418.1 384.2 418.2 374.9 408.8L319.9 353.8L264.9 408.8C255.5 418.2 240.3 418.2 231 408.8C221.7 399.4 221.6 384.2 231 374.9L286 319.9L231 264.9C221.6 255.5 221.6 240.3 231 231z"/></svg></td></tr>
-                            <tr><td class="text-white font-bold text-xl">Tidak Ada Data</td></tr>
-                        </tbody>                         
+                        
+                        <tbody class="bg-white flex flex-col rounded-2xl border-2 border-dark">
+                            @forelse ($jadwals as $i => $t)
+                                <tr wire:key="desktop-tiket-row-{{ $t['id'] }}"
+                                    @class([
+                                        'grid grid-cols-14 items-center border-dark',
+                                        'border-b-2' => ! $loop->last, 
+                                    ])>
+
+                                    <td class="col-span-1 h-full flex justify-center items-center text-center p-2 text-black font-bold border-e-2 border-dark">
+                                        {{ $t['id'] ?? '-' }}
+                                    </td>
+
+                                    <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-black font-bold border-e-2 border-dark">
+                                        {{ $t['namaJadwal'] ?? '-' }}
+                                    </td>
+
+                                    <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-black font-bold border-e-2 border-dark">
+                                        {{ ($t['lokasiBerangkat'] ?? '-') . ' - ' . ($t['lokasiTiba'] ?? '-') }}
+                                    </td>
+
+                                    <td class="col-span-3 h-full flex justify-center items-center text-center p-2 text-black font-bold border-e-2 border-dark">
+                                        {{ $t['waktuBerangkat'] ?? '-' }}
+                                    </td>
+
+                                    <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-black font-bold border-e-2 border-dark">
+                                        <div
+                                            @class([
+                                                'rounded-full! text-black! border-2! border-dark! p-2 text-center text-base',
+                                                'bg-yellow-300!' => ($t['status'] ?? null) === 'selesai', 
+                                                'bg-red-300!'   => ($t['status'] ?? null) === 'arrival_threshold',
+                                                'bg-blue-300!'  => ($t['status'] ?? null) === 'menunggu',
+                                                'bg-green-300!' => ($t['status'] ?? null) === 'open_gate',
+
+                                                'bg-white!' => ! in_array(
+                                                    $t['status'] ?? null,
+                                                    ['selesai', 'arrival_threshold', 'menunggu', 'open_gate'],
+                                                    true
+                                                ),
+                                            ])
+                                        >
+                                            {{ match ($t['status'] ?? null) {
+                                                'menunggu'            => 'Menunggu',
+                                                'open_gate'           => 'Open Gate',
+                                                'arrival_threshold'   => 'Arrival Threshold',
+                                                'selesai'             => 'Selesai',
+                                                default               => '-',
+                                            } }}
+                                        </div>
+                                    </td>
+
+                                    <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-dark font-bold cursor-pointer">
+                                        <flux:modal.trigger name="modal-edit-jadwal-{{ $t['id'] }}">
+                                            <flux:button class="bg-transparent! border-none! text-dark! shadow-none! text-xl!">•••</flux:button>
+                                        </flux:modal.trigger>
+                                    </td>
+                                </tr>
+                            @empty
+                                {{-- Tidak Ada Data (desktop) --}}
+                                    <tr class="flex flex-col min-w-full gap-y-4 min-h-60 items-center justify-center">
+                                        <td>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-24 h-24 fill-dark"><path d="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM231 231C240.4 221.6 255.6 221.6 264.9 231L319.9 286L374.9 231C384.3 221.6 399.5 221.6 408.8 231C418.1 240.4 418.2 255.6 408.8 264.9L353.8 319.9L408.8 374.9C418.2 384.3 418.2 399.5 408.8 408.8C399.4 418.1 384.2 418.2 374.9 408.8L319.9 353.8L264.9 408.8C255.5 418.2 240.3 418.2 231 408.8C221.7 399.4 221.6 384.2 231 374.9L286 319.9L231 264.9C221.6 255.5 221.6 240.3 231 231z"/></svg>
+                                        </td>
+                                        <td class="text-black font-bold text-xl">Tidak Ada Data</td>
+                                    </tr>
+                            @endforelse
+                        </tbody>                        
                     </table>
 
                     <!-- Tabel Mobile -->
-
                     <table class="min-lg:hidden bg-yellow rounded-xl border-2 border-dark p-4 flex flex-col gap-y-2">
-                        <!-- Baris 1 -->
-                        <tbody class="bg-white rounded-2xl border-2 border-dark flex flex-row justify-between">                            
-                            <tr class="flex flex-col items-start w-full">
-                                <td class="order-first text-start text-sm font-regular border-b-1 border-black flex flex-row justify-between w-full">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        No
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        1
-                                    </div>
-                                </td>
-                                <td class="order-1 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Nama Jadwal
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        Batam - Bintan Ferry
-                                    </div>
-                                </td>
-                                <td class="order-2 text-start text-sm font-regular border-b-1 border-black flex w-full">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Rute Perjalanan
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        Telaga Punggur - Bandar Bentan Telani
-                                    </div>
-                                </td>
-                                <td class="order-3 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Nama Kapal
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        KMP Serumpun Sebalai
-                                    </div>
-                                </td>
-                                <td class="order-4 text-start text-sm font-regular border-b-1 border-black flex w-full">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Jadwal Keberangkatan
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        20 Oktober 2023, 08:00 WIB
-                                    </div>
-                                </td>
-                                <td class="order-5 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Status
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        Menunggu
-                                    </div>
-                                </td>
-                                <td class="order-last text-start text-sm font-regular flex w-full">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Detail
-                                    </div>
-                                    <flux:modal.trigger name="modal-edit-jadwal" class="items-start! justify-start! flex! w-full! py-2! px-2! font-bold!">
-                                        <flux:button class="flex! py-1! bg-orange! text-white! rounded-full! px-2! border-1! border-dark! active:scale-90! transition-all! duration-50! font-bold!">Detail</flux:button>
-                                    </flux:modal.trigger>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <!-- Baris 2 -->
-                        <tbody class="bg-white rounded-2xl border-2 border-dark flex flex-row justify-between">                            
-                            <tr class="flex flex-col items-start w-full">
-                                <td class="order-first text-start text-sm font-regular border-b-1 border-black flex flex-row justify-between w-full">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        No
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        2
-                                    </div>
-                                </td>
-                                <td class="order-1 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Nama Jadwal
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        Batam - Bintan Ferry
-                                    </div>
-                                </td>
-                                <td class="order-2 text-start text-sm font-regular border-b-1 border-black flex w-full">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Rute Perjalanan
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        Telaga Punggur - Bandar Bentan Telani
-                                    </div>
-                                </td>
-                                <td class="order-3 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Nama Kapal
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        KMP Serumpun Sebalai
-                                    </div>
-                                </td>
-                                <td class="order-4 text-start text-sm font-regular border-b-1 border-black flex w-full">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Jadwal Keberangkatan
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        20 Oktober 2023, 08:00 WIB
-                                    </div>
-                                </td>
-                                <td class="order-5 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Status
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        Open Gate
-                                    </div>
-                                </td>
-                                <td class="order-last text-start text-sm font-regular flex w-full">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Detail
-                                    </div>
-                                    <flux:modal.trigger name="modal-edit-jadwal" class="items-start! justify-start! flex! w-full! py-2! px-2! font-bold!">
-                                        <flux:button class="flex! py-1! bg-orange! text-white! rounded-full! px-2! border-1! border-dark! active:scale-90! transition-all! duration-50! font-bold!">Detail</flux:button>
-                                    </flux:modal.trigger>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <!-- Baris 3 -->
-                        <tbody class="bg-white rounded-2xl border-2 border-dark flex flex-row justify-between">                            
-                            <tr class="flex flex-col items-start w-full">
-                                <td class="order-first text-start text-sm font-regular border-b-1 border-black flex flex-row justify-between w-full">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        No
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        3
-                                    </div>
-                                </td>
-                                <td class="order-1 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Nama Jadwal
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        Batam - Bintan Ferry
-                                    </div>
-                                </td>
-                                <td class="order-2 text-start text-sm font-regular border-b-1 border-black flex w-full">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Rute Perjalanan
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        Telaga Punggur - Bandar Bentan Telani
-                                    </div>
-                                </td>
-                                <td class="order-3 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Nama Kapal
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        KMP Serumpun Sebalai
-                                    </div>
-                                </td>
-                                <td class="order-4 text-start text-sm font-regular border-b-1 border-black flex w-full">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Jadwal Keberangkatan
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        20 Oktober 2023, 08:00 WIB
-                                    </div>
-                                </td>
-                                <td class="order-5 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Status
-                                    </div>
-                                    <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
-                                        Arrival Threshold
-                                    </div>
-                                </td>
-                                <td class="order-last text-start text-sm font-regular flex w-full">
-                                    <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
-                                        Detail
-                                    </div>
-                                    <flux:modal.trigger name="modal-edit-jadwal" class="items-start! justify-start! flex! w-full! py-2! px-2! font-bold!">
-                                        <flux:button class="flex! py-1! bg-orange! text-white! rounded-full! px-2! border-1! border-dark! active:scale-90! transition-all! duration-50! font-bold!">Detail</flux:button>
-                                    </flux:modal.trigger>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <!-- Tidak Ada Data -->
-                        <tbody class="bg-white rounded-2xl border-2 border-dark flex flex-col min-w-full min-h-60 gap-y-4 items-center justify-center">
-                            <tr><td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-24 h-24 fill-dark"><path d="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM231 231C240.4 221.6 255.6 221.6 264.9 231L319.9 286L374.9 231C384.3 221.6 399.5 221.6 408.8 231C418.1 240.4 418.2 255.6 408.8 264.9L353.8 319.9L408.8 374.9C418.2 384.3 418.2 399.5 408.8 408.8C399.4 418.1 384.2 418.2 374.9 408.8L319.9 353.8L264.9 408.8C255.5 418.2 240.3 418.2 231 408.8C221.7 399.4 221.6 384.2 231 374.9L286 319.9L231 264.9C221.6 255.5 221.6 240.3 231 231z"/></svg></td></tr>
-                            <tr><td class="text-dark font-bold text-xl">Tidak Ada Data</td></tr>
-                        </tbody>                                                                 
+                        @forelse ($jadwals as $i => $t)
+                            <tbody class="bg-white rounded-2xl border-2 border-dark flex flex-row justify-between" wire:key="mobile-tiket-row-{{ $t['id'] }}">                            
+                                <tr class="flex flex-col items-start w-full">
+                                    <td class="order-first text-start text-sm font-regular border-b-1 border-black flex flex-row justify-between w-full">
+                                        <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                            No
+                                        </div>
+                                        <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                            {{ $t['id'] ?? '-' }}
+                                        </div>
+                                    </td>
+                                    <td class="order-1 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
+                                        <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                            Nama Jadwal
+                                        </div>
+                                        <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                            {{ $t['namaJadwal'] ?? '-' }}
+                                        </div>
+                                    </td>
+                                    <td class="order-2 text-start text-sm font-regular border-b-1 border-black flex w-full">
+                                        <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                            Rute Perjalanan
+                                        </div>
+                                        <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                            {{ ($t['lokasiBerangkat'] ?? '-') . ' - ' . ($t['lokasiTiba'] ?? '-') }}
+                                        </div>
+                                    </td>
+                                    <td class="order-3 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
+                                        <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                            Nama Kapal
+                                        </div>
+                                        <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                            {{ $t['namaKapal'] ?? '-' }}
+                                        </div>
+                                    </td>
+                                    <td class="order-4 text-start text-sm font-regular border-b-1 border-black flex w-full">
+                                        <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                            Jadwal Keberangkatan
+                                        </div>
+                                        <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                            {{ $t['waktuBerangkat'] ?? '-' }}
+                                        </div>
+                                    </td>
+                                    <td class="order-5 text-start text-sm font-regular border-b-1 border-black flex w-full bg-dark/20">
+                                        <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                            Status
+                                        </div>
+                                        <div class="items-start justify-start flex w-full p-1.25 px-2 font-bold">
+                                            <div
+                                                @class([
+                                                    'rounded-full! text-black! border-2! border-dark! p-2 text-center text-base',
+                                                    'bg-yellow-300!' => ($t['status'] ?? null) === 'selesai', 
+                                                    'bg-red-300!'   => ($t['status'] ?? null) === 'arrival_threshold',
+                                                    'bg-blue-300!'  => ($t['status'] ?? null) === 'menunggu',
+                                                    'bg-green-300!' => ($t['status'] ?? null) === 'open_gate',
+
+                                                    'bg-white!' => ! in_array(
+                                                        $t['status'] ?? null,
+                                                        ['selesai', 'arrival_threshold', 'menunggu', 'open_gate'],
+                                                        true
+                                                    ),
+                                                ])
+                                            >
+                                                {{ match ($t['status'] ?? null) {
+                                                    'menunggu'            => 'Menunggu',
+                                                    'open_gate'           => 'Open Gate',
+                                                    'arrival_threshold'   => 'Arrival Threshold',
+                                                    'selesai'             => 'Selesai',
+                                                    default               => '-',
+                                                } }}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="order-last text-start text-sm font-regular flex w-full">
+                                        <div class="items-start justify-start flex w-full p-1.25 ps-2 border-e-1 border-black">
+                                            Detail
+                                        </div>
+                                        <flux:modal.trigger name="modal-edit-jadwal-{{ $t['id'] }}" class="items-start! justify-start! flex! w-full! py-2! px-2! font-bold!">
+                                            <flux:button class="flex! py-1! bg-orange! text-white! rounded-full! px-2! border-1! border-dark! active:scale-90! transition-all! duration-50! font-bold!">Detail</flux:button>
+                                        </flux:modal.trigger>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        @empty
+                            <!-- Tidak Ada Data -->
+                            <tbody class="bg-white rounded-2xl border-2 border-dark flex flex-col min-w-full min-h-60 gap-y-4 items-center justify-center">
+                                <tr><td><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-24 h-24 fill-dark"><path d="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM231 231C240.4 221.6 255.6 221.6 264.9 231L319.9 286L374.9 231C384.3 221.6 399.5 221.6 408.8 231C418.1 240.4 418.2 255.6 408.8 264.9L353.8 319.9L408.8 374.9C418.2 384.3 418.2 399.5 408.8 408.8C399.4 418.1 384.2 418.2 374.9 408.8L319.9 353.8L264.9 408.8C255.5 418.2 240.3 418.2 231 408.8C221.7 399.4 221.6 384.2 231 374.9L286 319.9L231 264.9C221.6 255.5 221.6 240.3 231 231z"/></svg></td></tr>
+                                <tr><td class="text-dark font-bold text-xl">Tidak Ada Data</td></tr>
+                            </tbody>                         
+                        @endforelse
                     </table>
                 </div>
             </div>

@@ -5,6 +5,7 @@ namespace App\Livewire\Dashboard;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 
 class KelolaPengguna extends Component
 {
@@ -44,7 +45,6 @@ class KelolaPengguna extends Component
 
     public function updatedStatusByTiket($value, $id): void
     {
-        // Simpan status lama untuk rollback kalau gagal
         $old = null;
         foreach ($this->tikets as $row) {
             if (($row['id'] ?? null) == $id) {
@@ -59,13 +59,12 @@ class KelolaPengguna extends Component
             'status' => $value,
         ]);
 
-        // logger()->info('Ambatukam');
+        Cache::increment('api:tikets:ver');          
 
         if ($res->failed()) {
-            // rollback dropdown
+
             $this->statusByTiket[$id] = $old;
 
-            // penting: lihat pesan API-nya (sementara untuk debugging)
             logger()->error('Update status tiket gagal', [
                 'id' => $id,
                 'status' => $value,
@@ -76,14 +75,13 @@ class KelolaPengguna extends Component
             return;
         }
 
-        // sync data lokal supaya UI lain yang baca $tikets ikut update
         foreach ($this->tikets as &$row) {
             if (($row['id'] ?? null) == $id) {
                 $row['status'] = $value;
                 break;
             }
         }
-        unset($row);
+        unset($row);   
     }
 
     public function fetchTikets(): void
@@ -97,34 +95,51 @@ class KelolaPengguna extends Component
             'status' => $this->filterStatus,
         ], fn ($v) => filled($v));
 
-        $response = Http::acceptJson()
-            ->get(config('services.api.base_url') . '/api/v1/tikets', $params)
-            ->throw(); // biar cepat ketahuan kalau error [web:37]
+        $cacheKey = $this->tiketsCacheKey($params);
 
-        $raw = $response->json('data', []);
+        try {
+            // $payload = Cache::remember($cacheKey, now()->addSeconds(10), function () use ($params) {
+            //     return Http::acceptJson()
+            //         ->get(config('services.api.base_url').'/api/v1/tikets', $params)
+            //         ->throw()
+            //         ->json();
+            // });
 
-        $this->tikets = $raw;
+            $payload = Http::acceptJson()
+                ->get(config('services.api.base_url') . '/api/v1/tikets', $params)
+                ->throw();
 
-        $this->tikets = collect($raw)->map(function (array $t) {
-            $jadwal = $t['jadwal'] ?? [];
+            // $raw = $response->json('data', []);
 
-            $dt = !empty($jadwal['waktuBerangkat']) ? Carbon::parse($jadwal['waktuBerangkat']) : null;
+            $this->tikets = $payload['data'] ??
+            Http::acceptJson()
+                        ->get(config('services.api.base_url') . '/api/v1/tikets', $params)
+                        ->throw()
+                        ->json('data', []);
 
-            $label = $dt ? $dt->locale('id')->translatedFormat('l, d F Y H:i') . ' WIB' : '-';
+            $this->tikets = collect($this->tikets)->map(function (array $t) {
+                $jadwal = $t['jadwal'] ?? [];
 
-            $t['jadwal']['waktuBerangkat'] = $label;
+                $dt = !empty($jadwal['waktuBerangkat']) ? Carbon::parse($jadwal['waktuBerangkat']) : null;
 
-            return $t;
-        })->all(); 
+                $label = $dt ? $dt->locale('id')->translatedFormat('l, d F Y H:i') . ' WIB' : '-';
 
-        // Meta global (tetap)
-        $this->jumlahTiket = (int) $response->json('meta.total', 0);
-        $this->menungguVerifikasi = (int) $response->json('meta.menungguVerifikasi', 0);
-        $this->terverifikasi = (int) $response->json('meta.terverifikasi', 0);
-        $this->dibatalkanKadaluarsa = (int) $response->json('meta.dibatalkanKadaluarsa', 0);
+                $t['jadwal']['waktuBerangkat'] = $label;
 
-        // Total hasil query (terfilter)
-        $this->totalKueri = (int) $response->json('meta.totalKueri.sesudah', count($this->tikets));
+                return $t;
+            })->all(); 
+
+            // Meta global (tetap)
+            $meta = $payload['meta'] ?? [];
+            $this->jumlahTiket = (int) ($meta['total'] ?? 0);
+            $this->menungguVerifikasi = (int) ($meta['menungguVerifikasi'] ?? 0);
+            $this->terverifikasi = (int) ($meta['terverifikasi'] ?? 0);
+            $this->dibatalkanKadaluarsa = (int) ($meta['dibatalkanKadaluarsa'] ?? 0);
+            $this->totalKueri = (int) ($meta['totalKueri'] ?? count($this->tikets));
+            
+        } catch (\Throwable $th) {
+            $this->dispatch('modal-gagal', message: 'Maaf Data Tiket Tidak Dapat Di Tampilkan, Karena Terdapat Gangguan Di Server, Silahkan Hubungi Teknisi', title: 'Gagal Menampilkan Tiket');                        
+        }
 
         $this->statusByTiket = [];
         foreach ($this->tikets as $t) {
@@ -135,12 +150,26 @@ class KelolaPengguna extends Component
 
     public function fetchPengguna(): void
     {
-        $response = Http::acceptJson()
-            ->get(config('services.api.base_url') . '/api/v1/penumpangs')
-            ->throw(); // [web:37]
+        try {
+            $response = Http::acceptJson()
+                ->get(config('services.api.base_url') . '/api/v1/penumpangs')
+                ->throw(); // [web:37]
 
-        $this->jumlahPengguna = (int) $response->json('meta.total', 0);
+            $this->jumlahPengguna = (int) $response->json('meta.total', 0);            
+        } catch (\Throwable $th) {
+            $this->dispatch('modal-gagal', message: 'Maaf Data Pengguna Tidak Dapat Di Tampilkan, Karena Terdapat Gangguan Di Server, Silahkan Hubungi Teknisi', title: 'Gagal Menampilkan Tiket');            
+        }
     }
+
+    private function tiketsCacheVersion(): int
+    {
+        return (int) Cache::get('api:tikets:ver', 1);
+    }
+
+    private function tiketsCacheKey(array $params): string
+    {
+        return 'api:tikets:v'.$this->tiketsCacheVersion().':' . md5(json_encode($params));
+    }    
 
     public function render()
     {

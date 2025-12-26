@@ -161,22 +161,6 @@
                                     </td>
 
                                     <td class="col-span-2 h-full flex justify-center items-center text-center p-2 text-black font-bold border-e-2 border-dark">
-                                        <!-- <div
-                                            @class([
-                                                'rounded-full! text-black! border-2! border-dark! p-2 text-center',
-                                                'bg-red-300!'   => ($statusByTiket[$t['id']] ?? null) === 'dibatalkan',
-                                                'bg-blue-300!'  => ($statusByTiket[$t['id']] ?? null) === 'menunggu_verifikasi',
-                                                'bg-green-300!' => ($statusByTiket[$t['id']] ?? null) === 'terverifikasi',
-                                                'bg-white!'     => ! in_array(($statusByTiket[$t['id']] ?? null), ['dibatalkan','menunggu_verifikasi','terverifikasi'], true),
-                                            ])                                        
-                                        >
-                                            {{ match($t['status'] ?? null) {
-                                                'dibatalkan' => 'Dibatalkan',
-                                                'menunggu_verifikasi' => 'Menunggu Verifikasi',
-                                                'terverifikasi' => 'Terverifikasi',
-                                                default => '-',
-                                            } }}
-                                        </div> -->
                                         <select
                                             wire:model.change="statusByTiket.{{ $t['id'] }}"
                                             @class([

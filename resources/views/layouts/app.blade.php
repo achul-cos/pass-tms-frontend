@@ -12,19 +12,27 @@
         @livewireStyles
     </head>
     <body class="antialiased bg-white text-black min-h-screen" x-data="{ sidebarOpen: true }" x-init="window.addEventListener('sidebar-toggled', e => sidebarOpen = e.detail)">
-        <livewire:modals.modal-berhasil />
-        <livewire:modals.modal-gagal />
-        <livewire:modals.modal-info />         
-        <div class="w-full h-full">
-            <!-- {{-- Global Loading Overlay --}}
-            <div wire:loading class="fixed inset-0 z-[9999] bg-black/40 flex items-center justify-center">
-                <livewire:loading />
-            </div> -->
 
-            <livewire:dashboard.sidebar :key="'sidebar'"/>    
-            <livewire:modals.modal-tiket :key="'modal-tiket'"/>
+        <div class="w-full h-full">
+            <livewire:modals.modal-berhasil />
+            <livewire:modals.modal-gagal />
+            <livewire:modals.modal-info />              
+
+            @if (Request::is('dashboard*'))
+                <livewire:dashboard.sidebar :key="'sidebar'" />
+                @if (Route::is('dashboard.KelolaPengguna'))
+                    <livewire:modals.modal-tiket :key="'modal-tiket'" />
+                @endif
+                @if (Route::is('dashboard.KelolaJadwalKeberangkatan'))
+                    <livewire:modals.modal-tiket :key="'modal-tiket'" />
+                    <livewire:modals.modal-tambah-jadwal :key="'tambahJadwal'"/>
+                    <livewire:modals.modal-detail-jadwal :key="'detailJadwal'"/>
+                @endif          
+            @endif
+
             {{ $slot }}
-        </div>        
+        </div>
+
         @vite('resources/js/app.js')
         @fluxScripts
         @livewireScripts
