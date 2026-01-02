@@ -13,12 +13,11 @@
     </head>
     <body class="antialiased bg-white text-black min-h-screen" x-data="{ sidebarOpen: true }" x-init="window.addEventListener('sidebar-toggled', e => sidebarOpen = e.detail)">
 
-        <div class="w-full h-full">
-            <livewire:modals.modal-berhasil />
-            <livewire:modals.modal-gagal />
-            <livewire:modals.modal-info />              
-
+        <div class="w-full h-full">             
             @if (Request::is('dashboard*'))
+                <livewire:modals.modal-berhasil />
+                <livewire:modals.modal-gagal />
+                <livewire:modals.modal-info />             
                 <livewire:dashboard.sidebar :key="'sidebar'" />
                 @if (Route::is('dashboard.KelolaPengguna'))
                     <livewire:modals.modal-tiket :key="'modal-tiket'" />

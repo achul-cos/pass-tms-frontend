@@ -181,6 +181,5 @@
                 </flux:button>
             </div>          -->
         </flux:modal>
-        
     @endforeach
 </div>
