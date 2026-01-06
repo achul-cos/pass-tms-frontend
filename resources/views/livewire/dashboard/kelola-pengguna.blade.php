@@ -118,7 +118,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-black/40 absolute left-2"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>
                         </div>
                         <div class="min-lg:col-span-2 flex flex-row relative items-center">
-                            <input  wire:model.live.debounce.500ms="filterStatus" placeholder="Status" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
+                            <input wire:model.live.debounce.500ms="filterStatus" placeholder="Status" class="ps-8 min-lg:w-full rounded-full items-center text-left bg-dark/40 p-2 px-4 placeholder:text-black/60 placeholder:font-italic border-2 border-dark/40" />
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-black/40 absolute left-2"><path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/></svg>
                         </div>                        
                     </div>
@@ -185,12 +185,12 @@
                                 </tr>
                             @empty
                                 {{-- Tidak Ada Data (desktop) --}}
-                                    <tr class="flex flex-col min-w-full gap-y-4 min-h-60 items-center justify-center">
-                                        <td>
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-24 h-24 fill-dark"><path d="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM231 231C240.4 221.6 255.6 221.6 264.9 231L319.9 286L374.9 231C384.3 221.6 399.5 221.6 408.8 231C418.1 240.4 418.2 255.6 408.8 264.9L353.8 319.9L408.8 374.9C418.2 384.3 418.2 399.5 408.8 408.8C399.4 418.1 384.2 418.2 374.9 408.8L319.9 353.8L264.9 408.8C255.5 418.2 240.3 418.2 231 408.8C221.7 399.4 221.6 384.2 231 374.9L286 319.9L231 264.9C221.6 255.5 221.6 240.3 231 231z"/></svg>
-                                        </td>
-                                        <td class="text-black font-bold text-xl">Tidak Ada Data</td>
-                                    </tr>
+                                <tr class="flex flex-col min-w-full gap-y-4 min-h-60 items-center justify-center">
+                                    <td>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-24 h-24 fill-dark"><path d="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM231 231C240.4 221.6 255.6 221.6 264.9 231L319.9 286L374.9 231C384.3 221.6 399.5 221.6 408.8 231C418.1 240.4 418.2 255.6 408.8 264.9L353.8 319.9L408.8 374.9C418.2 384.3 418.2 399.5 408.8 408.8C399.4 418.1 384.2 418.2 374.9 408.8L319.9 353.8L264.9 408.8C255.5 418.2 240.3 418.2 231 408.8C221.7 399.4 221.6 384.2 231 374.9L286 319.9L231 264.9C221.6 255.5 221.6 240.3 231 231z"/></svg>
+                                    </td>
+                                    <td class="text-black font-bold text-xl">Tidak Ada Data</td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>
